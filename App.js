@@ -1,34 +1,27 @@
 /**
  * @format
  */
+import { StyleSheet, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { LibraryProviderContext } from './src/context/LibraryContext.js';
+import { HomeScreen } from './src/screens/home/HomeScreen';
+import { BookScreen } from './src/screens/book/BookScreen';
 
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, FlatList, SafeAreaView, Text, View} from 'react-native';
-import {getLibraryData} from './helpers';
+const Stack = createStackNavigator();
 
 function App() {
-  const [library, setLibrary] = useState([]);
-
-  useEffect(() => {
-    getLibraryData(setLibrary);
-  }, []);
-
+  console.log('Todo bien'); //TODO: BORRAR
   return (
-    <View style={styles.container}>
-      <Text>Hola</Text>
-    </View>
+    <LibraryProviderContext>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Biblioteca" component={HomeScreen} />
+          <Stack.Screen name="Libro" component={BookScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </LibraryProviderContext>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'grey',
-    flex: 1,
-    padding:15
-  }
-});
 
 export default App;
