@@ -1,4 +1,4 @@
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, View, Text, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,15 +13,22 @@ export const BookList = ({ library }) => {
     navigation.navigate('Libro', selectedBook);
   };
 
+  const handleNewBook = () => {
+    navigation.navigate('Registrar nuevo libro');
+  };
+
   return (
-    <FlatList
-      data={library}
-      renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => handlePressBook(item)}>
-          <Book book={item} />
-        </TouchableOpacity>
-      )}
-      keyExtractor={(item) => item.id}
-    />
+    <View>
+      <Button title="Nuevo Libro" onPress={handleNewBook} />
+      <FlatList
+        data={library}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => handlePressBook(item)}>
+            <Book book={item} />
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
   );
 };

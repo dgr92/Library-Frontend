@@ -48,6 +48,7 @@ export const UpdateDeleteButtons = ({ book }) => {
         visible={visibleUpdateModal}
         onCancel={handlePressCancelUpdate}
         book={book}
+        
       />
     </View>
   );

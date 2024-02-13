@@ -5,11 +5,13 @@ export const Book = ({ book }) => {
     <View style={styles.book}>
       <Text>Título: {book.title}</Text>
       <Text>Autor: {book.author}</Text>
-      <Text>Editorial: {book.editorial}</Text>
       <Text>Nº de páginas: {book.pages}</Text>
+      <Text>Editorial: {book.editorial}</Text>
       <Text>ISBN-13: {book.isbn13}</Text>
       <Text>ID: {book.id}</Text>
-      <Text>{book.avaiable ? 'Diponible' : 'No disponible'}</Text>
+      <Text>
+        Disponibilidad: {book.avaiable ? 'Diponible' : 'No disponible'}
+      </Text>
     </View>
   );
 };
