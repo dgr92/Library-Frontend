@@ -28,6 +28,7 @@ export const newBookScreeenStyle = StyleSheet.create({
     textAlign: 'center',
     color: 'red',
     fontWeight: 'bold',
+    marginBottom: 10,
     margin: -15,
     backgroundColor: '#f2f2f2',
   },

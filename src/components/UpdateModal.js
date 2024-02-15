@@ -35,6 +35,7 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
       isbn13,
       availability,
     );
+
     onCancel(updatedBook);
   };
 
@@ -106,7 +107,7 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
               <Text style={updateModalStyle.name}>Nº de páginas:</Text>
               <TextInput
                 placeholder="Nº de páginas"
-                value={isNaN(pages) ? (value = 0) : pages.toString()}
+                value={isNaN(pages) ? '' : pages.toString()}
                 onChangeText={handlePagesChange}
                 keyboardType="numeric"
                 style={updateModalStyle.value}

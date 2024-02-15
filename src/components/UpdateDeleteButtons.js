@@ -14,8 +14,10 @@ export const UpdateDeleteButtons = ({ book }) => {
 
   // Update book logic
   const handlePressCancelUpdate = (updatedBook) => {
+    if (updatedBook.id) {
+      navigation.navigate('Libro', updatedBook);
+    }
     setVisibleUpdateModal(false);
-    navigation.navigate('Libro', updatedBook);
   };
 
   // Delete book logic

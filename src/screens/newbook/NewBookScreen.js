@@ -91,7 +91,7 @@ export const NewBookScreen = () => {
             <Text style={newBookScreeenStyle.name}>Nº de páginas:</Text>
             <TextInput
               placeholder="Nº de páginas"
-              value={isNaN(pages) ? (value = 0) : pages.toString()}
+              value={isNaN(pages) ? '' : pages.toString()}
               onChangeText={handlePagesChange}
               keyboardType="numeric"
               style={newBookScreeenStyle.value}
