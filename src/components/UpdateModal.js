@@ -16,11 +16,6 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
   const [errorMessage, setErrorMessage] = useState(' ');
   const { setLibrary } = useContext(LibraryContext);
 
-  const dropdownData = [
-    { label: 'Disponible', value: true },
-    { label: 'No disponible', value: false },
-  ];
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,8 +25,8 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
       setErrorMessage(' ');
     }
 
-    await updateBook(setLibrary, book.id, title, author, editorial, pages, isbn13, availability);
-    onCancel();
+    const updatedBook = await updateBook(setLibrary, book.id, title, author, editorial, pages, isbn13, availability);
+    onCancel(updatedBook);
   };
 
   const handleTitleChange = (value) => {
@@ -56,6 +51,12 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
   const handleAvailability = (value) => {
     setAvailability(value);
   };
+
+  // Picker options
+  const dropdownData = [
+    { label: 'Disponible', value: true },
+    { label: 'No disponible', value: false },
+  ];
 
   return (
     <Modal animationType="slide" transparent={false} visible={visible} onRequestClose={onCancel}>

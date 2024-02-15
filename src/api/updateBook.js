@@ -27,8 +27,8 @@ export const updateBook = async (setLibrary, id, title, author, editorial, pags,
       throw new Error(updated.message);
     }
 
-    await getBook(bookUpdated);
     await getAllBooks(setLibrary);
+    return bookUpdated;
   } catch (error) {
     console.log(error.message);
   }
