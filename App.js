@@ -11,7 +11,6 @@ import { NewBookScreen } from './src/screens/newbook/NewBookScreen.js';
 const Stack = createStackNavigator();
 
 function App() {
-  console.log('Todo bien'); //TODO: BORRAR
   return (
     <LibraryProviderContext>
       <NavigationContainer>

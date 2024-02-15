@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, Modal, View, Button, Text } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { TextInput, ScrollView } from 'react-native-gesture-handler';
 import { Dropdown } from 'react-native-element-dropdown';
 import { updateBook } from '../api/updateBook';
-import { LibraryContext } from '../context/LibraryContext.js';
+import { LibraryContext } from '../context/LibraryContext';
+import { updateModalStyle } from './styles/updateModalStyle';
 
 export const UpdateModal = ({ visible, book, onCancel }) => {
   const [title, setTitle] = useState(book.title);
@@ -12,7 +13,7 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
   const [pages, setPages] = useState(book.pages);
   const [isbn13, setIsbn13] = useState(book.isbn13);
   const [availability, setAvailability] = useState(book.avaiable);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState(' ');
   const { setLibrary } = useContext(LibraryContext);
 
   const dropdownData = [
@@ -23,12 +24,10 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!Number.isInteger(pages)) {
-      return setErrorMessage('El número de páginas debe ser un número entero.');
-    } else if (!title || !author || !editorial || !pages || !isbn13) {
-      return setErrorMessage('Todos los campos son obligatorios. Por favor, rellene todos los campos.');
+    if (!title || !author || !editorial || !pages || !isbn13) {
+      return setErrorMessage('Por favor, rellene todos los campos.');
     } else {
-      setErrorMessage('');
+      setErrorMessage(' ');
     }
 
     await updateBook(setLibrary, book.id, title, author, editorial, pages, isbn13, availability);
@@ -45,7 +44,11 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
     setEditorial(value);
   };
   const handlePagesChange = (value) => {
-    setPages(parseInt(value));
+    if (isNaN(value)) {
+      setPages(0);
+    } else {
+      setPages(parseInt(value));
+    }
   };
   const handleIsbnChange = (value) => {
     setIsbn13(value);
@@ -56,60 +59,85 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
 
   return (
     <Modal animationType="slide" transparent={false} visible={visible} onRequestClose={onCancel}>
-      <View>
+      <View style={updateModalStyle.container}>
+        <ScrollView>
+          <View style={updateModalStyle.form}>
+            <View>
+              <Text style={updateModalStyle.name}>Título:</Text>
+              <TextInput
+                placeholder="Título"
+                value={title}
+                onChangeText={handleTitleChange}
+                style={updateModalStyle.value}
+              />
+            </View>
+
+            <View>
+              <Text style={updateModalStyle.name}>Autor:</Text>
+              <TextInput
+                placeholder="Autor"
+                value={author}
+                onChangeText={handleAuthorChange}
+                style={updateModalStyle.value}
+              />
+            </View>
+
+            <View>
+              <Text style={updateModalStyle.name}>Editorial:</Text>
+              <TextInput
+                placeholder="Editorial"
+                value={editorial}
+                onChangeText={handleEditorialChange}
+                style={updateModalStyle.value}
+              />
+            </View>
+
+            <View>
+              <Text style={updateModalStyle.name}>Nº de páginas:</Text>
+              <TextInput
+                placeholder="Nº de páginas"
+                value={isNaN(pages) ? (value = 0) : pages.toString()}
+                onChangeText={handlePagesChange}
+                keyboardType="numeric"
+                style={updateModalStyle.value}
+              />
+            </View>
+
+            <View>
+              <Text style={updateModalStyle.name}>ISBN-13:</Text>
+              <TextInput
+                placeholder="ISBN-13"
+                value={isbn13}
+                onChangeText={handleIsbnChange}
+                style={updateModalStyle.value}
+              />
+            </View>
+
+            <View>
+              <Text style={updateModalStyle.name}>Disponibilidad:</Text>
+              <Dropdown
+                style={styles.dropdown}
+                data={dropdownData}
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                value={availability}
+                onChange={(item) => {
+                  handleAvailability(item.value);
+                }}
+              />
+            </View>
+          </View>
+        </ScrollView>
+
         <View>
-          <View>
-            <Text>Título:</Text>
-            <TextInput placeholder="Título" value={title} onChangeText={handleTitleChange} />
-          </View>
+          <Text style={updateModalStyle.error}>{errorMessage}</Text>
+        </View>
 
-          <View>
-            <Text>Autor:</Text>
-            <TextInput placeholder="Autor" value={author} onChangeText={handleAuthorChange} />
-          </View>
-
-          <View>
-            <Text>Editorial:</Text>
-            <TextInput placeholder="Editorial" value={editorial} onChangeText={handleEditorialChange} />
-          </View>
-
-          <View>
-            <Text>Nº de páginas:</Text>
-            <TextInput
-              placeholder="Nº de páginas"
-              value={pages}
-              onChangeText={handlePagesChange}
-              keyboardType="numeric"
-            />
-          </View>
-
-          <View>
-            <Text>ISBN-13:</Text>
-            <TextInput placeholder="ISBN-13" value={isbn13} onChangeText={handleIsbnChange} />
-          </View>
-
-          <View>
-            <Text>Disponibilidad:</Text>
-            <Dropdown
-              style={styles.dropdown}
-              data={dropdownData}
-              maxHeight={300}
-              labelField="label"
-              valueField="value"
-              value={availability}
-              onChange={(item) => {
-                handleAvailability(item.value);
-              }}
-            />
-          </View>
-
-          <View>{errorMessage != '' ? <Text>{errorMessage}</Text> : null}</View>
-
+        <View>
           <View style={{ marginTop: 10 }}>
             <Button title="Actualizar" onPress={handleSubmit} />
           </View>
-        </View>
-        <View>
           <Button title="Cancelar" onPress={onCancel} />
         </View>
       </View>
