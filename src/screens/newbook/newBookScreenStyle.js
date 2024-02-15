@@ -21,9 +21,9 @@ export const newBookScreeenStyle = StyleSheet.create({
     borderColor: 'grey',
     paddingBottom: -5,
     marginBottom: 15,
-    width:'75%'
+    width: '75%',
   },
-  buttons: {},
+
   error: {
     textAlign: 'center',
     color: 'red',

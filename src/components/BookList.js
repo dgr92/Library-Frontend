@@ -7,6 +7,7 @@ import { bookListStyle } from './styles/bookListStyle';
 
 export const BookList = ({ library }) => {
   const navigation = useNavigation();
+
   const handlePressBook = async (book) => {
     const selectedBook = await getBook(book);
     navigation.navigate('Libro', selectedBook);

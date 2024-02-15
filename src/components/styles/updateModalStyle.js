@@ -4,7 +4,7 @@ export const updateModalStyle = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
-    backgroundColor: '#f2f2f2'
+    backgroundColor: '#f2f2f2',
   },
   form: {
     padding: 15,
@@ -24,7 +24,13 @@ export const updateModalStyle = StyleSheet.create({
     marginBottom: 15,
     width: '75%',
   },
-
+  dropdown: {
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
   error: {
     textAlign: 'center',
     color: 'red',

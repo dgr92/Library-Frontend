@@ -5,7 +5,7 @@ export const bookListStyle = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  
+
   book: {
     borderColor: 'grey',
     borderWidth: 2,
@@ -14,7 +14,7 @@ export const bookListStyle = StyleSheet.create({
     width: '65%',
     alignSelf: 'center',
   },
-  
+
   button: {
     padding: 10,
     backgroundColor: '#2296f3',

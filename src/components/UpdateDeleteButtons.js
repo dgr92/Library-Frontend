@@ -14,8 +14,8 @@ export const UpdateDeleteButtons = ({ book }) => {
 
   // Update book logic
   const handlePressCancelUpdate = (updatedBook) => {
-    navigation.navigate('Libro', updatedBook);
     setVisibleUpdateModal(false);
+    navigation.navigate('Libro', updatedBook);
   };
 
   // Delete book logic
@@ -33,7 +33,11 @@ export const UpdateDeleteButtons = ({ book }) => {
     <View>
       <Button title="Actualizar Libro" onPress={() => setVisibleUpdateModal(true)} />
       <Button title="Borrar Libro" onPress={() => setVisibleDeleteModal(true)} />
-      <DeleteModal visible={visibleDeleteModal} onCancel={handlePressCancelDelete} onDelete={handlePressDelete} />
+      <DeleteModal
+        visible={visibleDeleteModal}
+        onCancel={handlePressCancelDelete}
+        onDelete={handlePressDelete}
+      />
 
       <UpdateModal visible={visibleUpdateModal} onCancel={handlePressCancelUpdate} book={book} />
     </View>

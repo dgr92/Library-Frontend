@@ -115,7 +115,7 @@ export const NewBookScreen = () => {
       </View>
 
       <View style={newBookScreeenStyle.buttons}>
-        <View style={{ marginTop: 10 }}>
+        <View>
           <Button title="Crear" onPress={onCreate} />
         </View>
         <Button title="Cancelar" onPress={onCancel} />

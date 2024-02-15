@@ -32,5 +32,5 @@ export const deleteModalStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginTop: 20,
-  }
+  },
 });

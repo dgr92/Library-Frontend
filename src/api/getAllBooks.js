@@ -5,9 +5,9 @@ export const getAllBooks = async (setLibrary) => {
       .then((book) => {
         return book.data;
       });
-    await setLibrary(libraryData);
 
+    await setLibrary(libraryData);
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 };

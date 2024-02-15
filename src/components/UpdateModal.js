@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, Modal, View, Button, Text } from 'react-native';
+import { Modal, View, Button, Text } from 'react-native';
 import { TextInput, ScrollView } from 'react-native-gesture-handler';
 import { Dropdown } from 'react-native-element-dropdown';
 import { updateBook } from '../api/updateBook';
@@ -25,7 +25,16 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
       setErrorMessage(' ');
     }
 
-    const updatedBook = await updateBook(setLibrary, book.id, title, author, editorial, pages, isbn13, availability);
+    const updatedBook = await updateBook(
+      setLibrary,
+      book.id,
+      title,
+      author,
+      editorial,
+      pages,
+      isbn13,
+      availability,
+    );
     onCancel(updatedBook);
   };
 
@@ -117,7 +126,7 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
             <View>
               <Text style={updateModalStyle.name}>Disponibilidad:</Text>
               <Dropdown
-                style={styles.dropdown}
+                style={updateModalStyle.dropdown}
                 data={dropdownData}
                 maxHeight={300}
                 labelField="label"
@@ -145,13 +154,3 @@ export const UpdateModal = ({ visible, book, onCancel }) => {
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  dropdown: {
-    height: 50,
-    borderColor: 'gray',
-    borderWidth: 0.5,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-  },
-});

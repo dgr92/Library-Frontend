@@ -6,6 +6,6 @@ export const getBook = async (book) => {
         return book.data;
       }));
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 };

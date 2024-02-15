@@ -1,5 +1,4 @@
 import { getAllBooks } from './getAllBooks';
-import { getBook } from './getBook';
 
 export const updateBook = async (setLibrary, id, title, author, editorial, pags, isbn, availability) => {
   try {
@@ -28,8 +27,9 @@ export const updateBook = async (setLibrary, id, title, author, editorial, pags,
     }
 
     await getAllBooks(setLibrary);
+
     return bookUpdated;
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 };

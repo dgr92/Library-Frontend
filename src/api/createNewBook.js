@@ -24,6 +24,6 @@ export const createNewBook = async (title, author, editorial, pages, isbn13, set
 
     await getAllBooks(setLibrary);
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 };

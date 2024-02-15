@@ -12,9 +12,8 @@ export const deleteBook = async (id, setLibrary) => {
       throw new Error(deletedBook.message);
     }
 
-    getAllBooks(setLibrary);
-    
+    await getAllBooks(setLibrary);
   } catch (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 };
